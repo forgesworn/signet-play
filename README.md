@@ -23,6 +23,8 @@ What it does:
 - **Old public notes**: taking back what an earlier version published.
 - Explicit public result sharing, behind its own signing permission.
 
+The relay client now lives in the `fray-relay-client` crate and is re-exported here as `relay`.
+
 The API is synchronous and never blocks. Work runs on the crate's own tokio
 runtime and long operations return a handle with `poll()`. The persona key
 never reaches this crate.

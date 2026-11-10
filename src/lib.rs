@@ -41,13 +41,12 @@ pub mod invite;
 mod legacy;
 pub mod nip46;
 pub mod played_with;
-pub mod relay;
+/// Talking to Nostr relays, from the `fray-relay-client` crate. The module
+/// path is kept so existing `relay::…` paths resolve as before.
+pub use fray_relay_client as relay;
 pub mod retract;
 mod signet;
 mod store;
-
-use std::sync::{Mutex, OnceLock, mpsc};
-use std::time::{Duration, Instant};
 
 pub use attestation::{AttestationError, PersonaInfo, needs_refresh, verify_attestation};
 pub use contacts::{Contact, ContactBook, ContactsSync, PairingLinks, Tier};
@@ -66,17 +65,9 @@ pub use signet::{
     pairing_link_is_stale,
 };
 
-/// The crate's own runtime. Created on first use; lives for the process.
+/// The crate's runtime: the relay client's own, so the process has one.
 pub(crate) fn runtime() -> &'static tokio::runtime::Runtime {
-    static RT: OnceLock<tokio::runtime::Runtime> = OnceLock::new();
-    RT.get_or_init(|| {
-        tokio::runtime::Builder::new_multi_thread()
-            .worker_threads(2)
-            .thread_name("decented-signet")
-            .enable_all()
-            .build()
-            .expect("decented-signet: could not start the tokio runtime")
-    })
+    fray_relay_client::runtime()
 }
 
 pub(crate) fn unix_now() -> u64 {
@@ -102,55 +93,9 @@ pub(crate) fn hidden_char(c: char) -> bool {
         )
 }
 
-/// The result of a background operation, delivered once.
-pub struct Task<T> {
-    rx: Mutex<mpsc::Receiver<T>>,
-}
-
-impl<T> std::fmt::Debug for Task<T> {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.write_str("Task")
-    }
-}
-
-impl<T: Send + 'static> Task<T> {
-    pub(crate) fn spawn<F>(fut: F) -> Task<T>
-    where
-        F: std::future::Future<Output = T> + Send + 'static,
-    {
-        let (tx, rx) = mpsc::channel();
-        runtime().spawn(async move {
-            let _ = tx.send(fut.await);
-        });
-        Task { rx: Mutex::new(rx) }
-    }
-
-    pub(crate) fn ready(value: T) -> Task<T> {
-        let (tx, rx) = mpsc::channel();
-        let _ = tx.send(value);
-        Task { rx: Mutex::new(rx) }
-    }
-
-    /// The result, once (never blocks).
-    pub fn poll(&self) -> Option<T> {
-        self.rx.lock().ok()?.try_recv().ok()
-    }
-
-    /// Block until the result arrives or `timeout` passes (tools and tests;
-    /// a frame loop uses [`Task::poll`]).
-    pub fn wait(&self, timeout: Duration) -> Option<T> {
-        let deadline = Instant::now() + timeout;
-        loop {
-            if let Some(v) = self.poll() {
-                return Some(v);
-            }
-            if Instant::now() >= deadline {
-                return None;
-            }
-            std::thread::sleep(Duration::from_millis(5));
-        }
-    }
-}
+/// The result of a background operation, delivered once: the relay client's
+/// handle, so this path and `relay::Task` name one type.
+pub use fray_relay_client::Task;
 
 /// The My Signet App Link for a `nostrconnect://` URI:
 /// `https://mysignet.app/?nostrconnect=<uri>&callback=<callback>`, each value

@@ -20,6 +20,7 @@ bdd4fe877acf3a6f4ca3174d1ce79c6672935e2f:
                                                       projection accept; engine coupling removed)
   its rendezvous relay client                       -> src/relay.rs (websocket worker pattern,
                                                       rewritten for stored events and NIP-01 filters)
+                                                      now the fray-relay-client crate, re-exported here as `relay`
 
 The vendored NIP-46 client is a mirror of forgesworn/signet-nip46-client
 (canonical commit 5b85902f4655e541d4c631da5bc3257868dcc96a, plus the earlier
