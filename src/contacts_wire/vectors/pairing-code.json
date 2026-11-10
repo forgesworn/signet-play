@@ -1,0 +1,45 @@
+{
+  "description": "pairingCode: a 6-digit code built from appPubkey, challenge, grantId and railPubkey (B1). Producer and consumer must agree byte for byte.",
+  "cases": [
+    {
+      "description": "base case",
+      "input": {
+        "appPubkey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "challenge": "dddddddddddddddddddddddddddddddd",
+        "grantId": "ffffffffffffffffffffffffffffffff",
+        "railPubkey": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "code": "112464"
+    },
+    {
+      "description": "same pairing, uppercase challenge \u2014 same code",
+      "input": {
+        "appPubkey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "challenge": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+        "grantId": "ffffffffffffffffffffffffffffffff",
+        "railPubkey": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "code": "112464"
+    },
+    {
+      "description": "a grantId chosen to produce a leading zero",
+      "input": {
+        "appPubkey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "challenge": "dddddddddddddddddddddddddddddddd",
+        "grantId": "c0000001099999999999999999999999",
+        "railPubkey": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "code": "082705"
+    },
+    {
+      "description": "a fully distinct pairing",
+      "input": {
+        "appPubkey": "3333333333333333333333333333333333333333333333333333333333333333",
+        "challenge": "99999999999999999999999999999999",
+        "grantId": "55555555555555555555555555555555",
+        "railPubkey": "7777777777777777777777777777777777777777777777777777777777777777"
+      },
+      "code": "689677"
+    }
+  ]
+}

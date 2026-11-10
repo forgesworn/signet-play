@@ -1,0 +1,28 @@
+[package]
+name = "decented-signet"
+description = "My Signet integration: NIP-46 persona sign-in, a local runtime-key attestation (kind 30420, never published), contacts-v2 app grant, the played-with book and gift-wrapped invites."
+version = "0.8.19"
+# The copied contacts wire uses let-chains, which need edition 2024.
+edition = "2024"
+license = "MIT"
+authors = ["decented"]
+repository = "https://github.com/decented/signet-play"
+
+[dependencies]
+decented-relays = { package = "fray-relays", git = "https://github.com/forgesworn/fray", rev = "4943413bb86a329c3ad9cc3180c02fd9186ef2ce" }
+decented-invite = { git = "https://github.com/forgesworn/friend-link-kit", rev = "91e9e2a53713805a8d50e59b3746815dbb0045d6" }
+aes-gcm = "0.11"
+base64 = "0.22"
+futures-util = { version = "0.3", default-features = false, features = ["sink", "std"] }
+getrandom = "0.3"
+hex = "0.4"
+log = "0.4"
+nostr = { version = "=0.44.8", features = ["nip44", "nip59"] }
+# TLS for wss:// relays.
+rustls = { version = "0.23", default-features = false, features = ["ring", "std"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.11"
+subtle = "2"
+tokio = { version = "1", features = ["rt-multi-thread", "net", "sync", "time", "macros"] }
+tokio-tungstenite = { version = "0.26.2", features = ["rustls-tls-webpki-roots"] }

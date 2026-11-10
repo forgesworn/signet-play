@@ -1,0 +1,54 @@
+{
+  "description": "sanitizeWireText: the one sanitiser on this wire. Producer and parser must agree byte for byte.",
+  "maxLen": 100,
+  "pairs": [
+    {
+      "input": "  Sam  ",
+      "output": "Sam"
+    },
+    {
+      "input": "Ada\u202eeda",
+      "output": "Adaeda"
+    },
+    {
+      "input": "Ada\u200bBo",
+      "output": "AdaBo"
+    },
+    {
+      "input": "line\nbreak",
+      "output": "linebreak"
+    },
+    {
+      "input": "tab\tted",
+      "output": "tabted"
+    },
+    {
+      "input": " ",
+      "output": ""
+    },
+    {
+      "input": "\u2066isolate\u2069",
+      "output": "isolate"
+    },
+    {
+      "input": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "output": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    {
+      "input": "",
+      "output": ""
+    },
+    {
+      "input": "   ",
+      "output": ""
+    },
+    {
+      "input": "\ud83d\udf02 sigil",
+      "output": "\ud83d\udf02 sigil"
+    },
+    {
+      "input": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\ud83d\udf02yyyyy",
+      "output": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\ud83d\udf02"
+    }
+  ]
+}

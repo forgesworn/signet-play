@@ -1,0 +1,75 @@
+decented-signet
+===============
+
+Parts of this crate were ported from an earlier game codebase by the same
+author (MIT licence, below), at source commit
+bdd4fe877acf3a6f4ca3174d1ce79c6672935e2f:
+
+  its Signet contacts wire module, with vectors   -> src/contacts_wire/ (copied unchanged; header
+                                                      comments edited)
+  its vendored NIP-46 client                        -> src/nip46.rs (URI builder, connect secret,
+                                                      constant-time echo check, persisted session,
+                                                      tests; the rust-nostr NostrConnect transport
+                                                      replaced by a request loop on this crate's
+                                                      relay trait; `perms` added to the URI)
+  its server attestation and runtime identity code  -> src/attestation.rs (mint/verify; the runtime key
+                                                      is bound by `p`, NIP-40 expiration added)
+  its Signet contacts store, ack wait, sync and
+  pairing flow                                      -> src/contacts.rs (grant, snapshot, ack gates,
+                                                      projection accept; engine coupling removed)
+  its rendezvous relay client                       -> src/relay.rs (websocket worker pattern,
+                                                      rewritten for stored events and NIP-01 filters)
+
+The vendored NIP-46 client is a mirror of forgesworn/signet-nip46-client
+(canonical commit 5b85902f4655e541d4c631da5bc3257868dcc96a, plus the earlier
+codebase's nostrconnect-secret divergence). The contacts wire is a port of
+forgesworn/signet-contacts; its conformance vectors are byte-for-byte copies
+taken at upstream commit fbb13cdeefb3e07421228ab3245b7e17e403ecab.
+
+The earlier game codebase is distributed under the MIT License:
+
+MIT License
+
+Copyright (c) 2026 decented
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+signet-nip46-client and signet-contacts are distributed under the MIT License:
+
+MIT License
+
+Copyright (c) 2026 ForgeSworn
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

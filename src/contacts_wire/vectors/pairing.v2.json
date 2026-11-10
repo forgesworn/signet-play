@@ -1,0 +1,45 @@
+{
+  "description": "Capability-scoped v2 pairing request, and the Signet ack that narrows it",
+  "nowSec": 1700000000,
+  "request": {
+    "uri": "signet-grant://pair?v=2&app=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&name=Flock&caps=signet.contacts.read%3Adirectory%2Csignet.contacts.blocks.read%2Csignet.contacts.propose%3Aadd-ken&dir=owner&relay=wss%3A%2F%2Frelay.example.com&t=1700000000&challenge=DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD",
+    "parsed": {
+      "v": 2,
+      "appPubkey": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "appName": "Flock",
+      "capabilities": [
+        "signet.contacts.read:directory",
+        "signet.contacts.blocks.read",
+        "signet.contacts.propose:add-ken"
+      ],
+      "directory": "owner",
+      "rendezvousRelay": "wss://relay.example.com",
+      "t": 1700000000,
+      "challenge": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+    }
+  },
+  "ack": {
+    "plaintext": "{\"v\":2,\"grantId\":\"ffffffffffffffffffffffffffffffff\",\"railPubkey\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"projectionTag\":\"5d65155161ef7e713af3bf7bc7b213d0\",\"proposalTag\":\"2713fc461de3b92ac3da773f33926f3d\",\"relay\":\"wss://relay.example.com\",\"grantedCapabilities\":[\"signet.contacts.read:directory\",\"signet.contacts.blocks.read\"],\"maxStalenessSeconds\":21600,\"challenge\":\"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"}",
+    "parsed": {
+      "v": 2,
+      "grantId": "ffffffffffffffffffffffffffffffff",
+      "railPubkey": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "projectionTag": "5d65155161ef7e713af3bf7bc7b213d0",
+      "proposalTag": "2713fc461de3b92ac3da773f33926f3d",
+      "relay": "wss://relay.example.com",
+      "grantedCapabilities": [
+        "signet.contacts.read:directory",
+        "signet.contacts.blocks.read"
+      ],
+      "maxStalenessSeconds": 21600,
+      "challenge": "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+    },
+    "v1Plaintext": "{\"v\":1,\"railPubkey\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"dTag\":\"signet:companion-rail\",\"snapshotRelay\":\"wss://relay.example.com\",\"grantedScope\":{\"tiers\":[\"kin\"],\"personas\":\"all\"},\"challenge\":\"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"}",
+    "wrongChallenge": "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+  },
+  "tags": {
+    "projectionTag": "5d65155161ef7e713af3bf7bc7b213d0",
+    "proposalTag": "2713fc461de3b92ac3da773f33926f3d",
+    "ackTag": "630f26ef0b0b835998967c711cb7c390"
+  }
+}
