@@ -6,7 +6,7 @@ version = "0.8.19"
 edition = "2024"
 license = "MIT"
 authors = ["decented"]
-repository = "https://github.com/decented/signet-play"
+repository = "https://github.com/forgesworn/signet-play"
 
 [dependencies]
 decented-relays = { package = "fray-relays", git = "https://github.com/forgesworn/fray", rev = "4943413bb86a329c3ad9cc3180c02fd9186ef2ce" }
