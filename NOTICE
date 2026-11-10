@@ -5,8 +5,9 @@ Parts of this crate were ported from an earlier game codebase by the same
 author (MIT licence, below), at source commit
 bdd4fe877acf3a6f4ca3174d1ce79c6672935e2f:
 
-  its Signet contacts wire module, with vectors   -> src/contacts_wire/ (copied unchanged; header
-                                                      comments edited)
+  its Signet contacts wire module, with vectors   -> now the signet-contacts crate
+                                                      (github.com/forgesworn/signet-contacts-rs),
+                                                      re-exported here as `contacts_wire`
   its vendored NIP-46 client                        -> src/nip46.rs (URI builder, connect secret,
                                                       constant-time echo check, persisted session,
                                                       tests; the rust-nostr NostrConnect transport

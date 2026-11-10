@@ -34,7 +34,9 @@
 
 pub mod attestation;
 pub mod contacts;
-pub mod contacts_wire;
+/// The contacts-v2 wire format, from the `signet-contacts` crate. The module
+/// path is kept so existing `contacts_wire::…` paths resolve as before.
+pub use signet_contacts as contacts_wire;
 pub mod invite;
 mod legacy;
 pub mod nip46;
