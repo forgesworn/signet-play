@@ -8,11 +8,8 @@ bdd4fe877acf3a6f4ca3174d1ce79c6672935e2f:
   its Signet contacts wire module, with vectors   -> now the signet-contacts crate
                                                       (github.com/forgesworn/signet-contacts-rs),
                                                       re-exported here as `contacts_wire`
-  its vendored NIP-46 client                        -> src/nip46.rs (URI builder, connect secret,
-                                                      constant-time echo check, persisted session,
-                                                      tests; the rust-nostr NostrConnect transport
-                                                      replaced by a request loop on this crate's
-                                                      relay trait; `perms` added to the URI)
+  its vendored NIP-46 client                        -> now the signet-nip46-client crate, re-exported here
+                                                      as `nip46` (its NOTICE has the provenance)
   its server attestation and runtime identity code  -> src/attestation.rs (mint/verify; the runtime key
                                                       is bound by `p`, NIP-40 expiration added)
   its Signet contacts store, ack wait, sync and
@@ -22,10 +19,7 @@ bdd4fe877acf3a6f4ca3174d1ce79c6672935e2f:
                                                       rewritten for stored events and NIP-01 filters)
                                                       now the fray-relay-client crate, re-exported here as `relay`
 
-The vendored NIP-46 client is a mirror of forgesworn/signet-nip46-client
-(canonical commit 5b85902f4655e541d4c631da5bc3257868dcc96a, plus the earlier
-codebase's nostrconnect-secret divergence). The contacts wire is a port of
-forgesworn/signet-contacts; its conformance vectors are byte-for-byte copies
+The contacts wire is a port of forgesworn/signet-contacts; its conformance vectors are byte-for-byte copies
 taken at upstream commit fbb13cdeefb3e07421228ab3245b7e17e403ecab.
 
 The earlier game codebase is distributed under the MIT License:
@@ -52,7 +46,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-signet-nip46-client and signet-contacts are distributed under the MIT License:
+signet-contacts is distributed under the MIT License:
 
 MIT License
 

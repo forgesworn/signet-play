@@ -12,6 +12,8 @@ repository = "https://github.com/forgesworn/signet-play"
 decented-relays = { package = "fray-relays", git = "https://github.com/forgesworn/fray", rev = "4943413bb86a329c3ad9cc3180c02fd9186ef2ce" }
 decented-invite = { git = "https://github.com/forgesworn/friend-link-kit", rev = "91e9e2a53713805a8d50e59b3746815dbb0045d6" }
 signet-contacts = { git = "https://github.com/forgesworn/signet-contacts-rs", rev = "5ea15c7ee060321cac18fd89b4e6af30cdaa07a7" }
+# A path for now: this becomes a git rev at publication.
+signet-nip46-client = { path = "../signet-nip46-client" }
 fray-relay-client = { git = "https://github.com/forgesworn/fray-relay-client", rev = "7b2243046a01814ad4ad8797ce563425dbcd9011" }
 aes-gcm = "0.11"
 base64 = "0.22"
@@ -22,7 +24,6 @@ nostr = { version = "=0.44.8", features = ["nip44", "nip59"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sha2 = "0.11"
-subtle = "2"
 tokio = { version = "1", features = ["rt-multi-thread", "sync", "time", "macros"] }
 
 [dev-dependencies]

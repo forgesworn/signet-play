@@ -39,7 +39,9 @@ pub mod contacts;
 pub use signet_contacts as contacts_wire;
 pub mod invite;
 mod legacy;
-pub mod nip46;
+/// The NIP-46 client, from the `signet-nip46-client` crate. The module path is
+/// kept so existing `nip46::…` paths resolve as before.
+pub use signet_nip46_client as nip46;
 pub mod played_with;
 /// Talking to Nostr relays, from the `fray-relay-client` crate. The module
 /// path is kept so existing `relay::…` paths resolve as before.

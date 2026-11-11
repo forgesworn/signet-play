@@ -24,6 +24,7 @@ What it does:
 - Explicit public result sharing, behind its own signing permission.
 
 The relay client now lives in the `fray-relay-client` crate and is re-exported here as `relay`.
+The NIP-46 client now lives in the `signet-nip46-client` crate and is re-exported here as `nip46`.
 
 The API is synchronous and never blocks. Work runs on the crate's own tokio
 runtime and long operations return a handle with `poll()`. The persona key
