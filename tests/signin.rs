@@ -99,7 +99,10 @@ fn explicit_refusal_fails_fast() {
     let SignInEvent::Failed { reason } = events.last().unwrap() else {
         panic!("{events:?}")
     };
-    assert!(reason.contains("user denied"), "{reason}");
+    // The fake signer's refusal does not echo the secret, so the client drops
+    // its text and reports the generic one.
+    assert!(reason.contains("the pairing was refused"), "{reason}");
+    assert!(!reason.contains("user denied"), "{reason}");
     assert!(!s.is_signed_in());
     assert!(!dir.join("signet/session.json").exists());
     let _ = std::fs::remove_dir_all(dir);
